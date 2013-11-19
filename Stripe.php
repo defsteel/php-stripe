@@ -378,6 +378,17 @@ class Stripe {
 		
 		return $this->_send_request( 'invoiceitems?'.$vars );
 	}
+    /**
+     * Retrieves and event after sending an event id. Send the id back to the Stripe API with this function.
+     * This allows you to verify the event came from Stripe.
+     * Stripe recommends logging the returned event event->id in order to avoid replay attacks.
+     * 
+     * @param string   Event id sent in the body of the webhook recieved by your webhook url.  
+     */
+    public function retrieve_event($event_id){
+        return $this->_send_request('events/'.$event_id);
+        
+    }
 	
 	/**
 	 * Private utility function that prepare and send the request to the API servers
